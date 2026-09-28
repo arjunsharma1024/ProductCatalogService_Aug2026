@@ -22,6 +22,13 @@ public class ProductController {
     @Autowired
     private IProductService productService;
 
+    @GetMapping("/products/{productId}/users/{userId}")
+    public ProductDto getProductDetailsBasedOnUserRole(@PathVariable Long productId,
+                                                       @PathVariable Long userId) {
+        Product product = productService.getProductBasedOnUserRole(productId, userId);
+        return from(product);
+    }
+
 
     @GetMapping("/products/{id}")
     public ResponseEntity<ProductDto> getProductDetailsById(@PathVariable("id") Long productId)
